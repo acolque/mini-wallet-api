@@ -49,4 +49,30 @@ public class CryptoYaApiTest {
 
         assertThrows(RestClientException.class, () -> api.getDollarBluePrice());
     }
+
+    @Test
+    public void testGetDollarOfficialPriceSuccess() {
+        double expected = 250D;
+        when(restTemplate.getForObject(anyString(), any())).thenReturn(CryptoYaDollarDto.builder().oficial(expected).build());
+
+        double result = api.getDollarOfficial();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetDollarOfficialPriceNullResponse() {
+        double expected = 0D;
+
+        double result = api.getDollarOfficial();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetDollarOfficialPriceThrows() {
+        when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
+
+        assertThrows(RestClientException.class, () -> api.getDollarOfficial());
+    }
 }

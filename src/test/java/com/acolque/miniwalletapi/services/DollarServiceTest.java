@@ -28,4 +28,15 @@ public class DollarServiceTest {
 
         assertEquals(expected, result);
     }
+
+    @Test
+    public void testGetDiffBetweenDollarBlueAndOfficial() {
+        String expected = "50%";
+        when(dollarDataSource.getDollarBluePrice()).thenReturn(500D);
+        when(dollarDataSource.getDollarOfficial()).thenReturn(250D);
+
+        String result = service.getDiffBetweenDollarBlueAndOfficial();
+
+        assertEquals(expected, result);
+    }
 }

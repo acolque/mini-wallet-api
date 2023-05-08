@@ -36,4 +36,14 @@ public class WalletControllerTest {
 
         assertThrows(RestClientException.class, () -> controller.getDollarBluePrice());
     }
+
+    @Test
+    public void testGetDiffBetweenDollarBlueAndOfficialSuccess() {
+        String expected = "50%";
+        when(dollarService.getDiffBetweenDollarBlueAndOfficial()).thenReturn(expected);
+
+        String result = controller.getDiffBetweenDollarBlueAndOfficial();
+
+        assertEquals(expected, result);
+    }
 }

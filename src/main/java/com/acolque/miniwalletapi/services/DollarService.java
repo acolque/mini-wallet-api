@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DollarService {
 
-    private DollarDataSource dollarDataSource;
+    private final DollarDataSource dollarDataSource;
 
     public DollarService(DollarDataSource dollarDataSource) {
         this.dollarDataSource = dollarDataSource;
@@ -14,5 +14,12 @@ public class DollarService {
 
     public double getDollarBluePrice() {
         return dollarDataSource.getDollarBluePrice();
+    }
+
+    public String getDiffBetweenDollarBlueAndOfficial() {
+        double dollarBlue = dollarDataSource.getDollarBluePrice();
+        double dollarOfficial = dollarDataSource.getDollarOfficial();
+        Double diffPercentage = (dollarBlue-dollarOfficial)*100/dollarBlue;
+        return String.format("%s%%", diffPercentage.intValue());
     }
 }

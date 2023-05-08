@@ -25,4 +25,14 @@ public class CryptoYaApi implements DollarDataSource {
             throw new RestClientException(String.format("Error en la api de CryptoYa: %s", ex.getMessage()), ex);
         }
     }
+
+    @Override
+    public double getDollarOfficial() {
+        try {
+            CryptoYaDollarDto resultDto = restTemplate.getForObject("https://criptoya.com/api/dolar", CryptoYaDollarDto.class);
+            return Objects.nonNull(resultDto) ? resultDto.getOficial() : 0D;
+        } catch (RestClientException ex) {
+            throw new RestClientException(String.format("Error en la api de CryptoYa: %s", ex.getMessage()), ex);
+        }
+    }
 }
