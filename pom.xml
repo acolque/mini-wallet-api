@@ -60,6 +60,7 @@
 				<configuration>
 					<excludes>
 						<exclude>com/acolque/**/entities/*</exclude>
+						<exclude>com/acolque/**/configs/*</exclude>
 						<exclude>com/acolque/**/*Application.class</exclude>
 					</excludes>
 				</configuration>
