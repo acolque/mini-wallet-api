@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CryptoYaDollarDto {
+public class DollarInfoDto {
 
     private double oficial;
     private double solidario;

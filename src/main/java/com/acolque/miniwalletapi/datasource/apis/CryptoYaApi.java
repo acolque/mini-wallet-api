@@ -1,11 +1,12 @@
 package com.acolque.miniwalletapi.datasource.apis;
 
-import com.acolque.miniwalletapi.entities.CryptoYaDollarDto;
+import com.acolque.miniwalletapi.entities.DollarInfoDto;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class CryptoYaApi implements DollarDataSource {
@@ -17,20 +18,10 @@ public class CryptoYaApi implements DollarDataSource {
     }
 
     @Override
-    public double getDollarBluePrice() {
+    public Optional<DollarInfoDto> getDollarInfo() {
         try {
-            CryptoYaDollarDto resultDto = restTemplate.getForObject("https://criptoya.com/api/dolar", CryptoYaDollarDto.class);
-            return Objects.nonNull(resultDto) ? resultDto.getBlue() : 0D;
-        } catch (RestClientException ex) {
-            throw new RestClientException(String.format("Error en la api de CryptoYa: %s", ex.getMessage()), ex);
-        }
-    }
-
-    @Override
-    public double getDollarOfficial() {
-        try {
-            CryptoYaDollarDto resultDto = restTemplate.getForObject("https://criptoya.com/api/dolar", CryptoYaDollarDto.class);
-            return Objects.nonNull(resultDto) ? resultDto.getOficial() : 0D;
+            DollarInfoDto resultDto = restTemplate.getForObject("https://criptoya.com/api/dolar", DollarInfoDto.class);
+            return Optional.ofNullable(resultDto);
         } catch (RestClientException ex) {
             throw new RestClientException(String.format("Error en la api de CryptoYa: %s", ex.getMessage()), ex);
         }

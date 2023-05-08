@@ -1,7 +1,10 @@
 package com.acolque.miniwalletapi.datasource.apis;
 
+import com.acolque.miniwalletapi.entities.DollarInfoDto;
+
+import java.util.Optional;
+
 public interface DollarDataSource {
 
-    double getDollarBluePrice();
-    double getDollarOfficial();
+    Optional<DollarInfoDto> getDollarInfo();
 }
