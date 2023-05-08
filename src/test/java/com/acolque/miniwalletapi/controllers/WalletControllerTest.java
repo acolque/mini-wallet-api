@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.client.RestClientException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class WalletControllerTest {
@@ -26,5 +28,12 @@ public class WalletControllerTest {
         double result = controller.getDollarBluePrice();
 
         assertEquals(priceExpected, result);
+    }
+
+    @Test
+    public void testGetDollarBluePriceThrows() {
+        when(dollarService.getDollarBluePrice()).thenThrow(RestClientException.class);
+
+        assertThrows(RestClientException.class, () -> controller.getDollarBluePrice());
     }
 }
