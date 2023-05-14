@@ -6,21 +6,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/wallet")
-public class WalletController {
+@RequestMapping("/dolar")
+public class DollarController {
 
     private final DollarService dollarService;
 
-    public WalletController(DollarService dollarService) {
+    public DollarController(DollarService dollarService) {
         this.dollarService = dollarService;
     }
 
-    @GetMapping("/dolar/blue")
+    @GetMapping("/blue")
     public double getDollarBluePrice() {
         return dollarService.getDollarBluePrice();
     }
 
-    @GetMapping("/dolar/brecha")
+    @GetMapping("/brecha")
     public String getDiffBetweenDollarBlueAndOfficial() {
         return dollarService.getDiffBetweenDollarBlueAndOfficial();
     }
