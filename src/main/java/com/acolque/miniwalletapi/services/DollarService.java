@@ -16,15 +16,15 @@ public class DollarService {
     }
 
     public double getDollarBluePrice() {
-        return dollarDataSource.getDollarInfo().map(DollarInfoDto::getBlue).orElse(0D);
+        return dollarDataSource.getDollarInfo()
+                .map(DollarInfoDto::getBlue)
+                .orElse(0D);
     }
 
     public String getDiffBetweenDollarBlueAndOfficial() {
-        Optional<DollarInfoDto> dollarInfo = dollarDataSource.getDollarInfo();
-        if (dollarInfo.isPresent()) {
-            Double diffPercentage = (dollarInfo.get().getBlue()-dollarInfo.get().getOficial())*100/dollarInfo.get().getBlue();
-            return String.format("%s%%", diffPercentage.intValue());
-        }
-        return "no data";
+        return dollarDataSource.getDollarInfo()
+                .map(info -> (info.getBlue() - info.getOficial())*100/info.getBlue())
+                .map(diff -> String.format("%s%%", diff.intValue()))
+                .orElse("no data");
     }
 }
