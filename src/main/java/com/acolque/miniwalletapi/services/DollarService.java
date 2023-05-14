@@ -4,8 +4,6 @@ import com.acolque.miniwalletapi.datasource.apis.DollarDataSource;
 import com.acolque.miniwalletapi.entities.DollarInfoDto;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class DollarService {
 
