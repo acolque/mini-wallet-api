@@ -1,6 +1,6 @@
 package com.acolque.miniwalletapi.datasource.apis;
 
-import com.acolque.miniwalletapi.entities.CryptoYaDollarDto;
+import com.acolque.miniwalletapi.entities.DollarInfoDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -9,8 +9,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -25,54 +26,27 @@ public class CryptoYaApiTest {
     private CryptoYaApi api;
 
     @Test
-    public void testGetDollarBluePriceSuccess() {
+    public void testGetDollarInfoSuccess() {
         double expected = 500D;
-        when(restTemplate.getForObject(anyString(), any())).thenReturn(CryptoYaDollarDto.builder().blue(expected).build());
+        when(restTemplate.getForObject(anyString(), any())).thenReturn(DollarInfoDto.builder().blue(expected).build());
 
-        double result = api.getDollarBluePrice();
+        Optional<DollarInfoDto> result = api.getDollarInfo();
 
-        assertEquals(expected, result);
+        assertTrue(result.isPresent());
+        assertEquals(expected, result.get().getBlue());
     }
 
     @Test
-    public void testGetDollarBluePriceNullResponse() {
-        double expected = 0D;
+    public void testGetDollarInfoNullResponse() {
+        Optional<DollarInfoDto> result = api.getDollarInfo();
 
-        double result = api.getDollarBluePrice();
-
-        assertEquals(expected, result);
+        assertTrue(result.isEmpty());
     }
 
     @Test
-    public void testGetDollarBluePriceThrows() {
+    public void testGetDollarInfoThrows() {
         when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
 
-        assertThrows(RestClientException.class, () -> api.getDollarBluePrice());
-    }
-
-    @Test
-    public void testGetDollarOfficialPriceSuccess() {
-        double expected = 250D;
-        when(restTemplate.getForObject(anyString(), any())).thenReturn(CryptoYaDollarDto.builder().oficial(expected).build());
-
-        double result = api.getDollarOfficial();
-
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void testGetDollarOfficialPriceNullResponse() {
-        double expected = 0D;
-
-        double result = api.getDollarOfficial();
-
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void testGetDollarOfficialPriceThrows() {
-        when(restTemplate.getForObject(anyString(), any())).thenThrow(RestClientException.class);
-
-        assertThrows(RestClientException.class, () -> api.getDollarOfficial());
+        assertThrows(RestClientException.class, () -> api.getDollarInfo());
     }
 }

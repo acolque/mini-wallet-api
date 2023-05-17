@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class WalletControllerTest {
+public class DollarControllerTest {
 
     @Autowired
-    private WalletController controller;
+    private DollarController controller;
 
     @MockBean
     private DollarService dollarService;
