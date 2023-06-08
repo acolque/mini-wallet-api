@@ -1,6 +1,6 @@
 package com.acolque.miniwalletapi.services;
 
-import com.acolque.miniwalletapi.datasource.apis.DollarDataSource;
+import com.acolque.miniwalletapi.datasource.DollarDataSource;
 import com.acolque.miniwalletapi.entities.DollarInfoDto;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.acolque.miniwalletapi.datasource.apis;
+package com.acolque.miniwalletapi.datasource;
 
 import com.acolque.miniwalletapi.entities.DollarInfoDto;
 
